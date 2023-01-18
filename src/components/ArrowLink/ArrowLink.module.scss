@@ -1,0 +1,23 @@
+@use '../../styles/colors';
+@use '../../styles/variables';
+
+.arrowLinkContainer {
+  display: flex;
+  align-items: center;
+  gap: variables.$gap-small;
+  
+  height: 24px;
+  width: 100%;
+}
+
+.arrowLink {
+  color: colors.$dark-grey;
+  line-height: variables.$lineHeight-regular;
+  font-weight: variables.$fontWeight-extraBold;
+
+  text-decoration: none;
+  transition: 0.5s;
+  &:hover {
+    text-decoration: underline;
+  }
+}
