@@ -1,0 +1,26 @@
+.searchTextFieldWrapper {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 600px;
+}
+
+.searchTextFieldLabele {
+  text-align: left;
+  margin-bottom: 10px;
+
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.searchResultCount {
+
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 5px;
+
+  text-align: left;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  
+}
