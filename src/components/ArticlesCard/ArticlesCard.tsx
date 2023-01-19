@@ -1,16 +1,21 @@
 import React from 'react';
 
+import Highlighter from "react-highlight-words";
+
 import EastOutlinedIcon from '@mui/icons-material/EastOutlined';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
+
+import ArrowLink from '../ArrowLink/ArrowLink';
 
 import classes from './ArticlesCard.module.scss';
 import IArticleData from '../../types/ArticleData.interface';
 
 interface IArticlesCardProps {
   article: IArticleData;
+  keywords: string[];
 }
 
-const ArticlesCard = ({ article }: IArticlesCardProps) => {
+const ArticlesCard = ({ article, keywords }: IArticlesCardProps) => {
   const normilizeTextToFixedCharsNumber = (text: string, textLenth: number) => {
     if (text.length < textLenth) return text;
     return text.slice(0, textLenth - 3) + '...';
@@ -38,10 +43,20 @@ const ArticlesCard = ({ article }: IArticlesCardProps) => {
           <p className={classes.publishedDate}>{formatPublishedDate(article.publishedAt)}</p>
         </div>
 
-        <h2 className={classes.title}>{normilizeTextToFixedCharsNumber(article.title, 100)}</h2>
+        <h2 className={classes.title}>
+          <Highlighter 
+            searchWords={keywords}
+            autoEscape={true}
+            textToHighlight={normilizeTextToFixedCharsNumber(article.title, 100)}
+          />
+        </h2>
 
         <div className={classes.description}>
-          {normilizeTextToFixedCharsNumber(article.description, 100)}
+          <Highlighter 
+            searchWords={keywords}
+            autoEscape={true}
+            textToHighlight={normilizeTextToFixedCharsNumber(article.description, 100)}
+          />
         </div>
 
         <div className={classes.navLinkContainer}>
