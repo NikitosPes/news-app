@@ -9,13 +9,13 @@ interface ArticlesProps {
 }
 
 const Articles = ({ articles }: ArticlesProps) => {
-  return(
+  return (
     <div className={classes.container}>
-      {
-        articles.map(article => <ArticlesCard article={article} key={article.id}/>)
-      }
+      {articles.map((article) => (
+        <ArticlesCard article={article} keywords={['']} key={article.id} />
+      ))}
     </div>
-  )
+  );
 };
 
 export default Articles;
