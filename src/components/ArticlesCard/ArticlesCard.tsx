@@ -60,10 +60,7 @@ const ArticlesCard = ({ article, keywords }: IArticlesCardProps) => {
         </div>
 
         <div className={classes.navLinkContainer}>
-          <a className={classes.navLink} href='#'>
-            Read more
-          </a>
-          <EastOutlinedIcon sx={{ fontSize: 16 }} />
+          <ArrowLink text='Read more' redirectURL='#'/>
         </div>
       </div>
     </div>
