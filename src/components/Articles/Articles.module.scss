@@ -1,6 +1,9 @@
-.container {
+.articlesContainer {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+
   gap: 45px;
+
+  width: 100%;
 }
