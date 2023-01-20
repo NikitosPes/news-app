@@ -6,6 +6,12 @@
     transform: rotate(360deg);
   }
 }
+.loadingSpinnerWrapper {
+  display: flex;
+  justify-content: center;
+  
+  width: 100%;
+}
 
 .spinnerContainer {
   display: flex;
