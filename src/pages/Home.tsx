@@ -8,6 +8,8 @@ import useTypedDispatch from '../hooks/useTypedDispatch';
 import HomeTemplate from '../templates/HomeTemplate/HomeTemplate';
 
 import { fetchArticles } from '../store/reducers/ActionCreators';
+import { setSelectedArticle } from '../store/reducers/ArticlesSlice';
+import IArticleData from '../types/ArticleData.interface';
 
 const Home = () => {
   const query = useInput('ReactJs');
@@ -24,6 +26,10 @@ const Home = () => {
     dispatch(fetchArticles(query.value));
   }, [searchQuery]);
 
+  const clickLinkHandler = (article: IArticleData) => {
+    dispatch(setSelectedArticle(article))
+  }
+
   return (
     <>
       <HomeTemplate
@@ -32,6 +38,7 @@ const Home = () => {
         articles={articles}
         fetchingErrorMessage={fetchingError}
         changeQueryHandler={query.onChange}
+        clickLinkHandler={clickLinkHandler}
       />
     </>
   );

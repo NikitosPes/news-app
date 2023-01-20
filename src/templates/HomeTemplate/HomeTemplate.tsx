@@ -13,6 +13,7 @@ interface HomeTemplateProps {
   articles: IArticleData[];
   fetchingErrorMessage: string;
   changeQueryHandler: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  clickLinkHandler: (article: IArticleData) => void;
 }
 
 const HomeTemplate = (props: HomeTemplateProps) => {
@@ -29,8 +30,14 @@ const HomeTemplate = (props: HomeTemplateProps) => {
       <div className={classes.homePageResultsCount}>Results: {props.articles.length}</div>
 
       <div className={classes.homePageArticlesWrapper}>
-        { props.loading && <LoadingSpinner />}
-        {!props.loading && <Articles articles={props.articles} keywords={props.query.split(' ')} />}
+        {props.loading && <LoadingSpinner />}
+        {!props.loading && (
+          <Articles
+            articles={props.articles}
+            keywords={props.query.split(' ')}
+            clickLinkHandler={props.clickLinkHandler}
+          />
+        )}
       </div>
     </div>
   );

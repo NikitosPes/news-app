@@ -7,13 +7,19 @@ import IArticleData from '../../types/ArticleData.interface';
 interface ArticlesProps {
   articles: IArticleData[];
   keywords: string[];
+  clickLinkHandler: (article: IArticleData) => void;
 }
 
-const Articles = ({ articles, keywords }: ArticlesProps) => {
+const Articles = ({ articles, keywords, clickLinkHandler }: ArticlesProps) => {
   return (
     <div className={classes.articlesContainer}>
       {articles.map((article) => (
-        <ArticlesCard article={article} keywords={keywords} key={article.id} />
+        <ArticlesCard
+          article={article}
+          keywords={keywords}
+          clickLinkHandler={clickLinkHandler}
+          key={article.id}
+        />
       ))}
     </div>
   );

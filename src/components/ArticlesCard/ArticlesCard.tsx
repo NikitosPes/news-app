@@ -2,6 +2,8 @@ import React from 'react';
 
 import Highlighter from 'react-highlight-words';
 
+import useTypedDispatch from '../../hooks/useTypedDispatch';
+
 import ArrowLink from '../ArrowLink/ArrowLink';
 import ArticlePublishedDate from '../ArticlePublishedDate/ArticlePublishedDate';
 
@@ -11,11 +13,11 @@ import IArticleData from '../../types/ArticleData.interface';
 interface IArticlesCardProps {
   article: IArticleData;
   keywords: string[];
+  clickLinkHandler: (article: IArticleData) => void;
 }
 
-
-const ArticlesCard = ({ article, keywords }: IArticlesCardProps) => {
-
+const ArticlesCard = ({ article, keywords, clickLinkHandler }: IArticlesCardProps) => {
+  const dispatch = useTypedDispatch();
   const MAX_TEXT_LENGTH = 100;
 
   const formatTextToFixedLength = (text: string, maxLength: number): string => {
@@ -50,7 +52,11 @@ const ArticlesCard = ({ article, keywords }: IArticlesCardProps) => {
           </div>
         </div>
 
-        <ArrowLink text='Read more' redirectURL='#' />
+        <ArrowLink
+          redirectURL='/article'
+          text='Read more'
+          onClick={() => clickLinkHandler(article)}
+        />
       </div>
     </div>
   );
