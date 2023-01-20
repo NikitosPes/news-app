@@ -16,10 +16,19 @@ const initialState: IArticlesState = {
   selectedArticle: null,
 };
 
+
 export const articlesSlice = createSlice({
   name: 'articles',
   initialState,
-  reducers: {},
+  reducers: {
+    setSelectedArticle(state, action: PayloadAction<IArticleData>) {
+      state.selectedArticle = action.payload;
+      console.log(state.selectedArticle)
+    },
+    resetSelectedArticle(state) {
+      state.selectedArticle = null;
+    }
+  },
   extraReducers: {
     [fetchArticles.fulfilled.type]: (state, action: PayloadAction<IArticleData[]>) => {
       state.loading = false;
@@ -37,3 +46,4 @@ export const articlesSlice = createSlice({
 });
 
 export default articlesSlice.reducer;
+export const { setSelectedArticle, resetSelectedArticle } = articlesSlice.actions;
