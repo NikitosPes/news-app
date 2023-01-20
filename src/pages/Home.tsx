@@ -1,50 +1,37 @@
-import { useState, useEffect, ChangeEvent } from "react";
+import React, { useEffect } from 'react';
 
-import useDebounce from "../hooks/useDebounce";
+import useInput from '../hooks/useInput';
+import useDebounce from '../hooks/useDebounce';
+import useTypedSelector from '../hooks/useTypedSelector';
+import useTypedDispatch from '../hooks/useTypedDispatch';
 
-import IArticleData from "../types/ArticleData.interface";
-import ArticlesService from "../services/ArticlesService";
-import HomeTemplate from "../templates/HomeTemplate/HomeTemplate";
+import HomeTemplate from '../templates/HomeTemplate/HomeTemplate';
 
+import { fetchArticles } from '../store/reducers/ActionCreators';
 
 const Home = () => {
-  const [query, setQuery] = useState<string>("ReactJS");
-  const [loading, setLoading] = useState<boolean>(true);
-  const [articles, setArticles] = useState<IArticleData[]>([]);
+  const query = useInput('ReactJs');
+  const dispatch = useTypedDispatch();
+  const searchQuery = useDebounce<string>(query.value, 500);
 
-  const searchQuery = useDebounce<string>(query, 500);
+  const { articles, loading, fetchingError } = useTypedSelector((state) => state.articlesReducer);
 
   useEffect(() => {
-    fetchArticlesDataByQuery(query)
+    dispatch(fetchArticles(query.value));
   }, []);
 
   useEffect(() => {
-    fetchArticlesDataByQuery(query)
+    dispatch(fetchArticles(query.value));
   }, [searchQuery]);
-
-
-  const fetchArticlesDataByQuery = async (query: string) => {
-    setLoading(true);
-    try {
-      const response = await ArticlesService.getArticlesBySearchQuery(query);
-      setArticles(response);
-    } catch (err) {
-      console.error(err);
-    }
-    setLoading(false);
-  };
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setQuery(event.target.value);
-  };
 
   return (
     <>
       <HomeTemplate
+        query={query.value}
         loading={loading}
-        query={searchQuery}
         articles={articles}
-        changeSearchQueryHandler={handleChange}
+        fetchingErrorMessage={fetchingError}
+        changeQueryHandler={query.onChange}
       />
     </>
   );

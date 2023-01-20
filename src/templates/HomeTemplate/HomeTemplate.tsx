@@ -29,7 +29,7 @@ const HomeTemplate = (props: HomeTemplateProps) => {
       <div className={classes.homePageResultsCount}>Results: {props.articles.length}</div>
 
       <div className={classes.homePageArticlesWrapper}>
-        {true && <LoadingSpinner />}
+        { props.loading && <LoadingSpinner />}
         {!props.loading && <Articles articles={props.articles} keywords={props.query.split(' ')} />}
       </div>
     </div>
