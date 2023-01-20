@@ -1,0 +1,17 @@
+@use '../../styles/colors';
+@use '../../styles/variables';
+
+.searchInputContainer {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.searchInputLabel {
+  text-align: left;
+
+  color: colors.$dark-grey;
+  font-weight: variables.$fontWeight-bold;
+  line-height: 20px;
+}
