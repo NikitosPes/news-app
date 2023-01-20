@@ -1,25 +1,32 @@
 @use '../../styles/colors';
 
-.backgroundImg {
+$backgrounImg-height: 245px;
+
+.articlePageContainer {
+  padding-top: 150px;
+  padding-bottom: 45px;
+}
+
+.articlePageBackgroundImg {
   position: absolute;
   top: 0;
   left: 0;
 
   box-sizing: border-box;
-  
+
   height: 245px;
   width: 100%;
 
   z-index: -1;
 }
 
-.articleContent {
+.articlePageContent {
   box-sizing: border-box;
   margin-top: 150px;
   padding: 0 75px;
 
   background: colors.$white;
-  border: 1px solid #EAEAEA;
+  border: 1px solid #eaeaea;
   box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.05);
   border-radius: 5px;
 
@@ -27,20 +34,20 @@
   width: 100%;
 }
 
-.articleTitle {
+.articlePageContentTitle {
   margin: 0;
   margin-top: 35px;
   text-align: center;
 }
 
-.articleContentText {
+.articlePageContentText {
   box-sizing: border-box;
   padding: 50px 0;
   height: auto;
 }
 
-.backwardLinkWrapper {
+.articlePageLinkWrapper {
   padding: 0 75px;
   margin-top: 35px;
   margin-bottom: 45px;
-} 
+}

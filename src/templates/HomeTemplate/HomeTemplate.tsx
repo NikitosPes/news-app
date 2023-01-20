@@ -1,51 +1,36 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent } from 'react';
 
-import TextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import Articles from '../../components/Articles/Articles';
+import SearchInput from '../../components/SearchInput/SearchInput';
+import LoadingSpinner from '../../components/LoadingSpiner/LoadingSpiner';
 
-import classes from "./HomeTemplate.module.scss";
-import IArticleData from "../../types/ArticleData.interface";
-import Articles from "../../components/Articles/Articles";
-import LoadingSpinner from "../../components/LoadingSpiner/LoadingSpiner";
+import classes from './HomeTemplate.module.scss';
+import IArticleData from '../../types/ArticleData.interface';
 
 interface HomeTemplateProps {
-  loading: boolean,
   query: string;
+  loading: boolean;
   articles: IArticleData[];
-  changeSearchQueryHandler: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)  => void;
+  fetchingErrorMessage: string;
+  changeQueryHandler: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
 const HomeTemplate = (props: HomeTemplateProps) => {
   return (
-    <div className={classes.homePageWrapper}>
-
-      <div className={classes.searchTextFieldWrapper}>
-        <label 
-          htmlFor="home_search-texfield" 
-          className={classes.searchTextFieldLabele}
-        >
-          Filter by keywords
-        </label>
-        <TextField
-          id="home_search-texfield"
-          size="small"
-          placeholder="Enter the topic you are interested in"
+    <div className={classes.homePageContainer}>
+      <div className={classes.homePageSearchInputWrapper}>
+        <SearchInput
           value={props.query}
-          onChange={e => props.changeSearchQueryHandler(e)}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchOutlinedIcon />
-              </InputAdornment>
-            ),
-          }}
+          label='Filter by keywords'
+          handlerChange={props.changeQueryHandler}
         />
       </div>
-          
-      <div className={classes.searchResultCount}>Results: {props.articles.length}</div>
-      <div>
-        { props.loading ? <LoadingSpinner /> :<Articles articles={props.articles}/> }
+
+      <div className={classes.homePageResultsCount}>Results: {props.articles.length}</div>
+
+      <div className={classes.homePageArticlesWrapper}>
+        {true && <LoadingSpinner />}
+        {!props.loading && <Articles articles={props.articles} keywords={props.query.split(' ')} />}
       </div>
     </div>
   );
